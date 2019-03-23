@@ -2,12 +2,25 @@ const request = require('request')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
-geocode('darwin', (error, data) => {
-    console.log('error: ', error)
-    console.log('Data: ', data)
-})
+// Get the address from the user
+const address = process.argv[2]
 
-forecast(37.8267, -122.4233, (error, data) => {
-    console.log('Error:', error)
-    console.log('Data', data)
-})
+if (!address) {
+    console.log("Enter a valid address")
+} else {
+    // call the geocode and forecast functions
+    geocode(address, (error, data) => {
+        if (error) {
+            return console.log('Error:', error)
+        }
+
+        forecast(data.longitude, data.latitude, (error, forecastData) => {
+            if (error) {
+                return console.log('Error:', error)
+            }
+            console.log('Location: ', data.location)
+            console.log('ForeCast', forecastData.summary)
+        })
+    })
+
+}
