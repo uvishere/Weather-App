@@ -1,3 +1,5 @@
+const request = require('request')
+
 // Get the geocode of the given address
 const geocode = (address, callback) => {
     const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoidXZpc2hlcmUiLCJhIjoiY2pleHBjOWtjMTZidTJ3bWoza3dlZmIxZiJ9.HvLEBmq44mUfdgT7-C73Jg'
@@ -20,3 +22,5 @@ const geocode = (address, callback) => {
         }
     })
 }
+
+module.exports = geocode
