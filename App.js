@@ -9,17 +9,18 @@ if (!address) {
     console.log("Enter a valid address")
 } else {
     // call the geocode and forecast functions
-    geocode(address, (error, data) => {
+    geocode(address, (error, {latitude, longitude, location}) => {
+
         if (error) {
             return console.log('Error:', error)
         }
 
-        forecast(data.longitude, data.latitude, (error, forecastData) => {
+        forecast(longitude, latitude, (error, {summary}) => {
             if (error) {
                 return console.log('Error:', error)
             }
-            console.log('Location: ', data.location)
-            console.log('ForeCast', forecastData.summary)
+            console.log('Location: ', location)
+            console.log('ForeCast', summary)
         })
     })
 
